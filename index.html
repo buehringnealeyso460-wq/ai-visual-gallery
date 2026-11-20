@@ -1,0 +1,30 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="description" content="个人 AI 图片与视频作品集">
+  <title>我的 AI 视觉作品馆</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <header class="hero">
+    <nav><a href="#top" class="brand">AI 视觉作品馆</a></nav>
+    <div class="hero-copy" id="top">
+      <p class="eyebrow" id="eyebrow">PERSONAL AI GALLERY</p>
+      <h1 id="hero-title">一些由想象力<br>生长出来的画面</h1>
+      <p class="intro" id="intro">这里收藏着我的 AI 图片与视频实验。慢慢看，希望你也能从中发现一点惊喜。</p>
+    </div>
+    <div class="orb orb-a"></div><div class="orb orb-b"></div>
+  </header>
+  <main class="collection">
+    <div class="heading"><div><p class="eyebrow">COLLECTION</p><h2 id="gallery-title">作品收藏</h2></div><span id="count">0 件作品</span></div>
+    <div class="filters" id="filters"></div>
+    <div class="grid" id="grid"></div>
+    <div class="empty" id="empty"><b>作品正在准备中</b><span>第一批 AI 视觉作品很快会来到这里。</span></div>
+  </main>
+  <footer><span>我的 AI 视觉作品馆</span><span>为家人与朋友而建</span></footer>
+  <dialog id="viewer"><button class="close" aria-label="关闭">关闭</button><div id="viewer-media"></div><div class="viewer-copy"><div><h3 id="viewer-title"></h3><p id="viewer-description"></p></div><span id="viewer-category"></span></div></dialog>
+  <script src="app.js"></script>
+</body>
+</html>
