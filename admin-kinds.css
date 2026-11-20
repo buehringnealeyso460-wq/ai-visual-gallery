@@ -1,0 +1,1 @@
+.kindTabs{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin:8px 0 12px}.kind{padding:15px}.kind.active{background:var(--accent);border-color:var(--accent);color:#1b120e;font-weight:800}.kindHelp{margin:0 0 22px;padding:12px 14px;background:#20232a;border-left:3px solid var(--accent);border-radius:6px}@media(max-width:700px){.kindTabs{grid-template-columns:1fr}}

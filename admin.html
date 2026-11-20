@@ -1,12 +1,13 @@
-<!doctype html><html lang="zh-CN"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="robots" content="noindex,nofollow"><title>AI 作品管理台</title><link rel="stylesheet" href="admin.css"></head><body>
+<!doctype html><html lang="zh-CN"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="robots" content="noindex,nofollow"><title>AI 作品管理台</title><link rel="stylesheet" href="admin.css"><link rel="stylesheet" href="admin-kinds.css"></head><body>
 <header><div><small>AI VISUAL GALLERY</small><h1>作品管理台</h1><p>上传、整理并发布你的视觉作品</p></div><a href="./" target="_blank">查看公开网站 ↗</a></header>
 <main>
   <section id="login" class="panel login"><div><span class="step">首次设置</span><h2>连接你的 GitHub</h2><p>输入具有本仓库“Contents: Read and write”权限的 Fine-grained token。令牌仅保存在当前浏览器，不会上传到网站文件。</p><input id="token" type="password" placeholder="github_pat_…" autocomplete="off"><label class="remember"><input id="remember" type="checkbox"> 在这台电脑记住</label><div class="actions"><button id="connect" class="primary">连接管理台</button><a class="button" href="https://github.com/settings/personal-access-tokens/new" target="_blank">创建专用令牌</a></div><p id="loginStatus" class="status"></p></div></section>
   <div id="workspace" hidden>
     <nav><button class="nav active" data-pane="works">作品管理</button><button class="nav" data-pane="appearance">网站文字与背景</button><button id="logout" class="nav danger">退出管理</button></nav>
     <section id="works" class="pane panel">
-      <div class="sectionHead"><div><span class="step">新增作品</span><h2>上传图片或视频</h2></div><span class="hint">本地文件建议小于 25MB</span></div>
-      <div class="formgrid"><label>作品标题<input id="title" placeholder="给作品起一个名字"></label><label>分类<input id="category" value="AI 图片"></label><label class="wide">作品说明<textarea id="description" placeholder="可选：写一点创作说明"></textarea></label><label class="wide drop">选择本地图片或视频<input id="file" type="file" accept="image/*,video/mp4,video/webm"><span id="fileName">点击选择文件</span></label><div class="or wide">或者使用视频直链</div><label class="wide">视频网址<input id="videoUrl" placeholder="https://…（必须是可直接播放的视频文件地址）"></label></div>
+      <div class="sectionHead"><div><span class="step">新增作品</span><h2>选择作品类型</h2></div><span class="hint">单个文件必须小于 100MB</span></div>
+      <div class="kindTabs"><button class="kind active" data-kind="image">图片作品</button><button class="kind" data-kind="short">100MB 内短片</button><button class="kind" data-kind="long">100MB 以上长片</button></div><p id="kindHelp" class="kindHelp">选择一张图片直接上传。</p>
+      <div class="formgrid"><label>作品标题<input id="title" placeholder="给作品起一个名字"></label><label>分类<input id="category" value="AI 图片"></label><label class="wide">作品说明<textarea id="description" placeholder="可选：写一点创作说明"></textarea></label><label class="wide drop">选择作品文件<input id="file" type="file" accept="image/*"><span id="fileName">点击选择图片</span></label><div class="or wide">或者使用视频直链</div><label class="wide">视频网址<input id="videoUrl" placeholder="https://…（必须是可直接播放的视频文件地址）"></label></div>
       <button id="add" class="primary large">上传并发布作品</button><p id="uploadStatus" class="status"></p>
       <hr><div class="sectionHead"><div><span class="step">已发布</span><h2>作品列表</h2></div><button id="reload" class="button">刷新</button></div><div id="items" class="items"></div>
     </section>
