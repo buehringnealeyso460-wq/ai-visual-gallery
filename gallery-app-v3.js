@@ -108,7 +108,7 @@ function view(id) {
   const item = state.items.find(work => work.id === id);
   if (!item) return;
   if (item.bvid) $('viewer-media').innerHTML = biliPlayer(item);
-  else if (kind(item) === 'image') $('viewer-media').innerHTML = `<img src="${escapeHtml(item.src)}" alt="${escapeHtml(item.title)}">`;
+  else if (kind(item) === 'image') $('viewer-media').innerHTML = `<div class="viewer-image"><img src="${escapeHtml(item.thumbnail || item.src)}" alt="${escapeHtml(item.title)}" decoding="async"><a href="${escapeHtml(item.src)}" target="_blank" rel="noopener">查看高清原图</a></div>`;
   else $('viewer-media').innerHTML = `<video src="${escapeHtml(item.src)}" controls playsinline></video>`;
   $('viewer-title').textContent = item.title;
   $('viewer-description').textContent = item.description || '';
