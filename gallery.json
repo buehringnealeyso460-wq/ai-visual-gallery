@@ -473,6 +473,21 @@
       "width": 2048,
       "height": 1152,
       "orientation": "landscape"
+    },
+    {
+      "id": "3xfl1toziecmwt48an5",
+      "title": "AI-视觉图",
+      "category": "图片作品",
+      "description": "",
+      "type": "image",
+      "kind": "image",
+      "production": "ai",
+      "src": "media/1795429261581-wicohr.png",
+      "thumbnail": "media/thumbs/1795429261581-wicohr.webp",
+      "mobileThumbnail": "media/mobile/1795429261581-wicohr.webp",
+      "width": 2048,
+      "height": 1152,
+      "orientation": "landscape"
     }
   ]
 }
