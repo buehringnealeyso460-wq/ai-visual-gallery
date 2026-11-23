@@ -323,6 +323,21 @@
       "width": 2816,
       "height": 1584,
       "orientation": "landscape"
+    },
+    {
+      "id": "irijnl5i7jmwt3clsf",
+      "title": "AI-视觉图",
+      "category": "图片作品",
+      "description": "",
+      "type": "image",
+      "kind": "image",
+      "production": "ai",
+      "src": "media/1795427784046-lcelqu.png",
+      "thumbnail": "media/thumbs/1795427784046-lcelqu.webp",
+      "mobileThumbnail": "media/thumbs/1795427784046-lcelqu.webp",
+      "width": 2816,
+      "height": 1584,
+      "orientation": "landscape"
     }
   ]
 }
