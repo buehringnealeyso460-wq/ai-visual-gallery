@@ -103,6 +103,18 @@
       "width": 1584,
       "height": 2816,
       "orientation": "portrait"
+    },
+    {
+      "id": "kwbr928t2dpmwstqtzp",
+      "title": "校内-25大广赛（三福）",
+      "category": "影视作品",
+      "description": "",
+      "type": "video",
+      "kind": "short",
+      "production": "traditional",
+      "provider": "bilibili",
+      "bvid": "BV1UGypzBEc8",
+      "page": 1
     }
   ]
 }
