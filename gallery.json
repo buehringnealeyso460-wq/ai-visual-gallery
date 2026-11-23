@@ -278,6 +278,21 @@
       "provider": "bilibili",
       "bvid": "BV1pFyHzZEeE",
       "page": 14
+    },
+    {
+      "id": "meav9s4wqlrmwt2qra9",
+      "title": "AI-视觉图",
+      "category": "图片作品",
+      "description": "",
+      "type": "image",
+      "kind": "image",
+      "production": "ai",
+      "src": "media/1795426762914-tlkxqp.png",
+      "thumbnail": "media/thumbs/1795426762914-tlkxqp.webp",
+      "mobileThumbnail": "media/thumbs/1795426762914-tlkxqp.webp",
+      "width": 2816,
+      "height": 1584,
+      "orientation": "landscape"
     }
   ]
 }
