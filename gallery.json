@@ -158,6 +158,18 @@
       "provider": "bilibili",
       "bvid": "BV1akynzgEVG",
       "page": 4
+    },
+    {
+      "id": "yqn6vs59lfmwt0xb5y",
+      "title": "校内-《盲道添彩，青春赋能》",
+      "category": "影视作品",
+      "description": "",
+      "type": "video",
+      "kind": "short",
+      "production": "traditional",
+      "provider": "bilibili",
+      "bvid": "BV1QkynzgEmt",
+      "page": 5
     }
   ]
 }
