@@ -67,10 +67,13 @@ function orientationSection(title, orientation, items) {
   return `<section class="orientation-group"><div class="orientation-heading"><h4>${title}</h4><span>${items.length} 件</span></div><div class="orientation-grid ${orientation}-grid">${items.map(imageCard).join('')}</div></section>`;
 }
 
-function imageCard(item) {
+function imageCard(item, index) {
   const preview = item.thumbnail || item.src;
+  const mobilePreview = item.mobileThumbnail || preview;
   const production = ({ ai: 'AI 制作', traditional: '传统影视' })[item.production] || '未标注';
-  return `<button class="card" data-id="${escapeHtml(item.id)}"><div class="media image-skeleton"><img src="${escapeHtml(preview)}" alt="${escapeHtml(item.title)}" width="${item.width || ''}" height="${item.height || ''}" loading="lazy" decoding="async" fetchpriority="low" onload="this.parentElement.classList.remove('image-skeleton')"></div><div class="caption"><b>${escapeHtml(item.title)}</b><small>${production}</small></div></button>`;
+  const loading = index < 4 ? 'eager' : 'lazy';
+  const priority = index < 2 ? 'high' : 'low';
+  return `<button class="card" data-id="${escapeHtml(item.id)}"><div class="media image-skeleton"><picture><source media="(max-width:720px)" srcset="${escapeHtml(mobilePreview)}"><img src="${escapeHtml(preview)}" alt="${escapeHtml(item.title)}" width="${item.width || ''}" height="${item.height || ''}" loading="${loading}" decoding="async" fetchpriority="${priority}" onload="this.closest('.media').classList.remove('image-skeleton')"></picture></div><div class="caption"><b>${escapeHtml(item.title)}</b><small>${production}</small></div></button>`;
 }
 
 function renderVideos(groupName, items) {
