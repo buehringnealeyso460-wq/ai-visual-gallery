@@ -14,7 +14,11 @@
       "type": "image",
       "kind": "image",
       "production": "ai",
-      "src": "media/1795408751684-hpvd8t.png"
+      "src": "media/1795408751684-hpvd8t.png",
+      "thumbnail": "media/thumbs/1795408751684-hpvd8t.webp",
+      "width": 1584,
+      "height": 2816,
+      "orientation": "portrait"
     },
     {
       "id": "76a8fhgvve2mwss188e",
@@ -24,7 +28,11 @@
       "type": "image",
       "kind": "image",
       "production": "ai",
-      "src": "media/1795408780380-5tqou1.png"
+      "src": "media/1795408780380-5tqou1.png",
+      "thumbnail": "media/thumbs/1795408780380-5tqou1.webp",
+      "width": 1584,
+      "height": 2816,
+      "orientation": "portrait"
     },
     {
       "id": "w3lgx89qbnmwss2dml",
@@ -34,7 +42,11 @@
       "type": "image",
       "kind": "image",
       "production": "ai",
-      "src": "media/1795408832950-2ertna.png"
+      "src": "media/1795408832950-2ertna.png",
+      "thumbnail": "media/thumbs/1795408832950-2ertna.webp",
+      "width": 1584,
+      "height": 2816,
+      "orientation": "portrait"
     },
     {
       "id": "jrzoa01ocwbmwss3250",
@@ -44,7 +56,11 @@
       "type": "image",
       "kind": "image",
       "production": "ai",
-      "src": "media/1795408865012-uui5w4.png"
+      "src": "media/1795408865012-uui5w4.png",
+      "thumbnail": "media/thumbs/1795408865012-uui5w4.webp",
+      "width": 1584,
+      "height": 2816,
+      "orientation": "portrait"
     },
     {
       "id": "yn9dinqxpxpmwss3efe",
@@ -54,7 +70,11 @@
       "type": "image",
       "kind": "image",
       "production": "ai",
-      "src": "media/1795408880311-phe8rd.png"
+      "src": "media/1795408880311-phe8rd.png",
+      "thumbnail": "media/thumbs/1795408880311-phe8rd.webp",
+      "width": 1584,
+      "height": 2816,
+      "orientation": "portrait"
     },
     {
       "id": "56ht0qx7fwdmwss3pay",
@@ -64,7 +84,11 @@
       "type": "image",
       "kind": "image",
       "production": "ai",
-      "src": "media/1795408895095-rw1yrb.png"
+      "src": "media/1795408895095-rw1yrb.png",
+      "thumbnail": "media/thumbs/1795408895095-rw1yrb.webp",
+      "width": 1584,
+      "height": 2816,
+      "orientation": "portrait"
     },
     {
       "id": "gv72o68viltmwss4gqp",
@@ -74,7 +98,11 @@
       "type": "image",
       "kind": "image",
       "production": "ai",
-      "src": "media/1795408929615-r2i02x.png"
+      "src": "media/1795408929615-r2i02x.png",
+      "thumbnail": "media/thumbs/1795408929615-r2i02x.webp",
+      "width": 1584,
+      "height": 2816,
+      "orientation": "portrait"
     }
   ]
 }
