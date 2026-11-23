@@ -5,16 +5,5 @@
     "intro": "这里收藏着我的 AI 图片与视频作品。慢慢看，希望你也能从中发现一点惊喜。",
     "galleryTitle": "作品展示"
   },
-  "items": [
-    {
-      "id": "lkugjrf7fkfmwsrcaf2",
-      "title": "校内-AI参赛图",
-      "category": "图片作品",
-      "description": "品味东方航海美学",
-      "type": "image",
-      "kind": "image",
-      "production": "ai",
-      "src": "media/1795407614427-n6pqwm.png"
-    }
-  ]
+  "items": []
 }
