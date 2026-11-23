@@ -368,6 +368,21 @@
       "width": 1152,
       "height": 2048,
       "orientation": "portrait"
+    },
+    {
+      "id": "ma7svzwrosrmwt3qmom",
+      "title": "AI-设计图",
+      "category": "图片作品",
+      "description": "",
+      "type": "image",
+      "kind": "image",
+      "production": "ai",
+      "src": "media/1795428434268-thnlpk.png",
+      "thumbnail": "media/thumbs/1795428434268-thnlpk.webp",
+      "mobileThumbnail": "media/mobile/1795428434268-thnlpk.webp",
+      "width": 2816,
+      "height": 1584,
+      "orientation": "landscape"
     }
   ]
 }
