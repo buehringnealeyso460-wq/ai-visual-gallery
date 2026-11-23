@@ -1,0 +1,31 @@
+:root{--pointer-x:70vw;--pointer-y:32vh}
+body{position:relative;background:#090910;overflow-x:hidden}
+body::before{content:"";position:fixed;inset:0;z-index:0;pointer-events:none;background:linear-gradient(#ffffff08 1px,transparent 1px),linear-gradient(90deg,#ffffff08 1px,transparent 1px);background-size:58px 58px;mask-image:linear-gradient(to bottom,#0008,transparent 82%);animation:grid-drift 14s linear infinite}
+.ambient-canvas{position:fixed;inset:0;width:100%;height:100%;z-index:0;pointer-events:none;opacity:.9}
+.cursor-aura{position:fixed;left:var(--pointer-x);top:var(--pointer-y);width:34rem;height:34rem;z-index:0;pointer-events:none;border-radius:50%;background:radial-gradient(circle,#f391c326 0,#6f67ff16 28%,transparent 68%);filter:blur(8px);transform:translate(-50%,-50%);transition:left .12s linear,top .12s linear}
+.hero,.collection,footer,dialog{position:relative;z-index:1}
+.hero{isolation:isolate;background:linear-gradient(135deg,#0d0c14e8,#17101bd6 46%,#0f1121e0);min-height:76vh}
+.hero::before,.hero::after{content:"";position:absolute;pointer-events:none;z-index:-1}
+.hero::before{inset:-35%;background:conic-gradient(from 70deg at 62% 52%,transparent 0 8%,#ff5aa64a 17%,transparent 28% 38%,#705cff62 48%,transparent 60% 73%,#ffb86b4a 82%,transparent 94%);filter:blur(42px) saturate(150%);animation:aurora-spin 15s linear infinite}
+.hero::after{inset:-12%;background:radial-gradient(ellipse at 20% 22%,#ff7aab48,transparent 24%),radial-gradient(ellipse at 78% 30%,#7259ff52,transparent 27%),radial-gradient(ellipse at 58% 94%,#ff9e6150,transparent 25%);filter:blur(18px);animation:aurora-breathe 7s ease-in-out infinite alternate}
+.hero-copy{animation:copy-rise .9s ease-out both}
+.hero h1{background:linear-gradient(100deg,#fff 12%,#ffd7bd 38%,#d7c9ff 64%,#fff 88%);background-size:220% auto;color:transparent;background-clip:text;-webkit-background-clip:text;animation:title-shimmer 6s linear infinite;filter:drop-shadow(0 0 24px #a465ff20)}
+.hero .orb{display:block;opacity:.55;mix-blend-mode:screen;filter:blur(4px)}
+.orb-a{background:linear-gradient(135deg,#ff5591,#715cff);animation:orb-float 9s ease-in-out infinite alternate}
+.orb-b{display:block;background:#ffc16d;box-shadow:0 0 80px #ff7c68;animation:orb-float 7s ease-in-out -2s infinite alternate-reverse}
+.explore{position:relative;display:inline-flex;align-items:center;margin:0 5vw 2rem;padding:.58rem 1.15rem;border:1px solid #f3c5aa8a;border-radius:2rem;color:#ffe5cc;background:#ffffff08;box-shadow:inset 0 0 20px #ffffff08,0 0 28px #dc81ff18;backdrop-filter:blur(12px);transition:transform .25s,background .25s,box-shadow .25s}
+.explore:hover,.explore:focus-visible{transform:translateY(-2px);background:#ffffff16;box-shadow:0 0 38px #db7cff38}
+.collection{background:linear-gradient(180deg,#111115e8,#0d0c12f5);backdrop-filter:blur(5px)}
+.collection::before{content:"";position:absolute;inset:0;pointer-events:none;background:linear-gradient(110deg,transparent 0 44%,#b87cff0b 50%,transparent 56%);background-size:240% 100%;animation:light-sweep 9s ease-in-out infinite}
+.card{transition:transform .28s ease,filter .28s ease}
+.card .media{transition:box-shadow .28s,border-color .28s}
+@media(hover:hover){.card:hover{transform:translateY(-7px) scale(1.012);filter:saturate(1.1)}.card:hover .media{box-shadow:0 20px 55px #0009,0 0 0 1px #f0b68f85,0 0 32px #8a61ff22}}
+@keyframes aurora-spin{to{transform:rotate(360deg) scale(1.08)}}
+@keyframes aurora-breathe{from{transform:translate3d(-4%,3%,0) scale(.94);opacity:.65}to{transform:translate3d(5%,-3%,0) scale(1.1);opacity:1}}
+@keyframes orb-float{from{transform:translate3d(-6%,-5%,0) rotate(-8deg);border-radius:42% 58% 66% 34%}to{transform:translate3d(8%,9%,0) rotate(14deg);border-radius:65% 35% 43% 57%}}
+@keyframes title-shimmer{to{background-position:220% center}}
+@keyframes grid-drift{to{background-position:58px 58px}}
+@keyframes light-sweep{0%,20%{background-position:150% 0}80%,100%{background-position:-80% 0}}
+@keyframes copy-rise{from{opacity:0;transform:translateY(24px)}to{opacity:1;transform:none}}
+@media(max-width:720px){.hero{min-height:70vh}.hero::before{animation-duration:22s;filter:blur(32px)}.cursor-aura{display:none}.ambient-canvas{opacity:.7}.hero h1{animation-duration:9s}.orb-a{opacity:.38}.orb-b{opacity:.32}}
+@media(prefers-reduced-motion:reduce){body::before,.hero::before,.hero::after,.hero h1,.hero-copy,.orb-a,.orb-b,.collection::before{animation:none}.card:hover,.card:hover .media>*{transform:none}}
