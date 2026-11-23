@@ -443,6 +443,21 @@
       "width": 1152,
       "height": 2048,
       "orientation": "portrait"
+    },
+    {
+      "id": "18ekp0dzitwjmwt474kv",
+      "title": "AI-视觉图",
+      "category": "图片作品",
+      "description": "",
+      "type": "image",
+      "kind": "image",
+      "production": "ai",
+      "src": "media/1795429207244-9r5wk7.png",
+      "thumbnail": "media/thumbs/1795429207244-9r5wk7.webp",
+      "mobileThumbnail": "media/mobile/1795429207244-9r5wk7.webp",
+      "width": 2048,
+      "height": 1152,
+      "orientation": "landscape"
     }
   ]
 }
