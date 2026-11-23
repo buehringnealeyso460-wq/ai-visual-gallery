@@ -50,6 +50,7 @@ function render() {
 
 function renderImages(items) {
   const container = $('image-grid');
+  container.closest('.work-group').hidden = items.length === 0;
   container.className = 'image-layout';
   const landscape = items.filter(item => imageOrientation(item) === 'landscape');
   const portrait = items.filter(item => imageOrientation(item) === 'portrait');
@@ -74,6 +75,7 @@ function imageCard(item) {
 
 function renderVideos(groupName, items) {
   const grid = $(`${groupName}-grid`);
+  grid.closest('.work-group').hidden = items.length === 0;
   grid.className = 'grid compact-video-grid';
   grid.innerHTML = items.map(videoCard).join('');
   $(`${groupName}-count`).textContent = `${items.length} 件`;
