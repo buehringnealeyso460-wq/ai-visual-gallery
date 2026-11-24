@@ -553,6 +553,19 @@
       "provider": "bilibili",
       "bvid": "BV11wyZzAECL",
       "page": 1
+    },
+    {
+      "id": "fnigtf7jieumwu7qcvo",
+      "title": "厉害剑宗-1",
+      "year": "2026",
+      "category": "影视作品",
+      "description": "",
+      "type": "video",
+      "kind": "short",
+      "production": "ai",
+      "provider": "bilibili",
+      "bvid": "BV12FyZzeE3h",
+      "page": 1
     }
   ]
 }
