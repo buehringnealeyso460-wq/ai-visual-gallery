@@ -4,7 +4,6 @@ const galleryState = {
   index: 0,
   view: 'slider',
   mediaFilter: 'all',
-  productionFilter: 'all',
   switching: false
 };
 
@@ -33,6 +32,7 @@ function applySettings(settings) {
   element('about-title').textContent = brand;
   element('creative-label').textContent = settings.creativeLabel || settings.eyebrow || 'AI VISUAL ARTIST / FILMMAKER';
   element('archive-title').textContent = settings.galleryTitle || '作品展示';
+  element('archive-title').dataset.defaultTitle = settings.galleryTitle || '作品展示';
   element('archive-statement').textContent = settings.heroTitle || '';
   element('archive-description').textContent = settings.intro || '';
   element('about-description').textContent = settings.intro || '';
@@ -98,9 +98,7 @@ function previewMarkup(item, eager = false) {
 function applyFilters() {
   galleryState.filtered = galleryState.items.filter(item => {
     const media = isImage(item) ? 'image' : 'video';
-    const mediaMatches = galleryState.mediaFilter === 'all' || galleryState.mediaFilter === media;
-    const productionMatches = galleryState.productionFilter === 'all' || galleryState.productionFilter === item.production;
-    return mediaMatches && productionMatches;
+    return galleryState.mediaFilter === 'all' || galleryState.mediaFilter === media;
   });
   galleryState.index = Math.min(galleryState.index, Math.max(0, galleryState.filtered.length - 1));
   element('empty-state').hidden = galleryState.filtered.length > 0;
@@ -148,6 +146,11 @@ function peekMarkup(item, label) {
 }
 
 function renderArchive() {
+  if (galleryState.mediaFilter !== 'all') {
+    renderCategorizedArchive();
+    return;
+  }
+  element('archive-list').className = 'archive-list';
   element('archive-list').innerHTML = galleryState.filtered.map((item, index) => `
     <button class="archive-row" type="button" data-index="${index}">
       <span class="archive-index">${String(index + 1).padStart(2, '0')}</span>
@@ -161,23 +164,56 @@ function renderArchive() {
   });
 }
 
+function galleryCard(item, index) {
+  return `<button class="gallery-card ${orientation(item) === 'portrait' ? 'is-portrait' : 'is-landscape'}" type="button" data-index="${index}">
+    <span class="gallery-card-media">${previewMarkup(item)}</span>
+    <span class="gallery-card-copy"><strong>${escapeHtml(item.title)}</strong><small>${escapeHtml(item.year || item.category || typeLabel(item))}</small></span>
+  </button>`;
+}
+
+function orientationGroup(label, items) {
+  if (!items.length) return '';
+  return `<div class="orientation-group"><h2>${label}<small>${items.length}</small></h2><div class="gallery-grid">${items.map(item => galleryCard(item, galleryState.filtered.indexOf(item))).join('')}</div></div>`;
+}
+
+function categorizedSection(items, production) {
+  const label = production === 'ai' ? 'AI 制作' : '传统影视';
+  const id = `section-${production}`;
+  if (!items.length) return `<section class="catalog-section" id="${id}"><header><span>${label}</span><small>0 件</small></header><p class="catalog-empty">此分类暂时没有作品</p></section>`;
+  if (galleryState.mediaFilter === 'image') {
+    return `<section class="catalog-section" id="${id}"><header><span>${label}</span><small>${items.length} 件</small></header>${orientationGroup('横屏作品', items.filter(item => orientation(item) === 'landscape'))}${orientationGroup('竖屏作品', items.filter(item => orientation(item) === 'portrait'))}</section>`;
+  }
+  return `<section class="catalog-section" id="${id}"><header><span>${label}</span><small>${items.length} 件</small></header><div class="gallery-grid video-grid">${items.map(item => galleryCard(item, galleryState.filtered.indexOf(item))).join('')}</div></section>`;
+}
+
+function renderCategorizedArchive() {
+  const aiItems = galleryState.filtered.filter(item => item.production !== 'traditional');
+  const traditionalItems = galleryState.filtered.filter(item => item.production === 'traditional');
+  element('archive-list').className = 'archive-list catalog-layout';
+  element('archive-list').innerHTML = categorizedSection(aiItems, 'ai') + categorizedSection(traditionalItems, 'traditional');
+  element('archive-list').querySelectorAll('.gallery-card').forEach(card => {
+    card.onclick = () => openViewer(galleryState.filtered[Number(card.dataset.index)]);
+  });
+}
+
 function move(direction) {
   if (galleryState.switching || galleryState.filtered.length < 2) return;
   galleryState.switching = true;
   const composition = element('featured-composition');
-  composition.style.setProperty('--slide-direction', direction > 0 ? '-18px' : '18px');
+  composition.style.setProperty('--slide-direction', direction > 0 ? '-28px' : '28px');
   composition.classList.add('is-leaving');
   const reduced = matchMedia('(prefers-reduced-motion: reduce)').matches;
   setTimeout(() => {
     galleryState.index = (galleryState.index + direction + galleryState.filtered.length) % galleryState.filtered.length;
     renderFeatured();
-    composition.style.setProperty('--slide-direction', direction > 0 ? '18px' : '-18px');
+    composition.style.setProperty('--slide-direction', direction > 0 ? '28px' : '-28px');
     requestAnimationFrame(() => composition.classList.remove('is-leaving'));
     setTimeout(() => { galleryState.switching = false; }, reduced ? 0 : 380);
   }, reduced ? 0 : 180);
 }
 
 function setView(view) {
+  if (galleryState.mediaFilter !== 'all') view = 'list';
   galleryState.view = view;
   element('slider-button').classList.toggle('is-active', view === 'slider');
   element('list-button').classList.toggle('is-active', view === 'list');
@@ -188,13 +224,31 @@ function setView(view) {
 }
 
 function setFilter(group, value) {
-  if (group === 'media') galleryState.mediaFilter = value;
-  else galleryState.productionFilter = value;
-  const container = element(group === 'media' ? 'media-filters' : 'production-filters');
-  container.querySelectorAll('button').forEach(button => {
+  if (group !== 'media') return;
+  galleryState.mediaFilter = value;
+  element('media-filters').querySelectorAll('button').forEach(button => {
     button.classList.toggle('is-active', button.dataset.filter === value);
   });
+  renderProductionNavigation();
+  galleryState.view = value === 'all' ? 'slider' : 'list';
+  document.querySelector('.view-switch').hidden = value !== 'all';
+  document.querySelector('.archive-heading .micro-label').textContent = value === 'image' ? 'COLLECTION / 图片作品' : value === 'video' ? 'COLLECTION / 影视作品' : 'ARCHIVE / 全部作品';
+  element('archive-title').textContent = value === 'image' ? '图片作品总览' : value === 'video' ? '影视作品总览' : element('archive-title').dataset.defaultTitle;
   applyFilters();
+  setView(galleryState.view);
+  element('archive-view').scrollTop = 0;
+}
+
+function renderProductionNavigation() {
+  const filters = element('production-filters');
+  if (galleryState.mediaFilter === 'all') {
+    filters.innerHTML = '<button type="button" class="is-active" data-filter="all">全部方式</button>';
+    return;
+  }
+  filters.innerHTML = '<button type="button" data-target="section-ai">AI 制作</button><button type="button" data-target="section-traditional">传统影视</button>';
+  filters.querySelectorAll('button').forEach(button => {
+    button.onclick = () => element(button.dataset.target)?.scrollIntoView({ behavior: matchMedia('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth', block: 'start' });
+  });
 }
 
 function biliPlayer(item) {
@@ -250,10 +304,6 @@ element('about-back').onclick = () => setView(galleryState.view);
 element('media-filters').querySelectorAll('button').forEach(button => {
   button.onclick = () => setFilter('media', button.dataset.filter);
 });
-element('production-filters').querySelectorAll('button').forEach(button => {
-  button.onclick = () => setFilter('production', button.dataset.filter);
-});
-
 element('viewer').querySelector('.close').onclick = () => element('viewer').close();
 element('viewer').onclick = event => {
   if (event.target === element('viewer')) element('viewer').close();
@@ -274,18 +324,19 @@ document.addEventListener('keydown', event => {
 
 let wheelLock = false;
 element('slider-view').addEventListener('wheel', event => {
-  if (Math.abs(event.deltaY) < 18 || wheelLock) return;
+  const horizontalDelta = Math.abs(event.deltaX) > Math.abs(event.deltaY) ? event.deltaX : event.deltaY;
+  if (Math.abs(horizontalDelta) < 18 || wheelLock) return;
   event.preventDefault();
   wheelLock = true;
-  move(event.deltaY > 0 ? 1 : -1);
+  move(horizontalDelta > 0 ? 1 : -1);
   setTimeout(() => { wheelLock = false; }, 650);
 }, { passive: false });
 
-let touchStartY = 0;
+let touchStartX = 0;
 element('slider-view').addEventListener('touchstart', event => {
-  touchStartY = event.touches[0].clientY;
+  touchStartX = event.touches[0].clientX;
 }, { passive: true });
 element('slider-view').addEventListener('touchend', event => {
-  const distance = touchStartY - event.changedTouches[0].clientY;
+  const distance = touchStartX - event.changedTouches[0].clientX;
   if (Math.abs(distance) > 55) move(distance > 0 ? 1 : -1);
 }, { passive: true });

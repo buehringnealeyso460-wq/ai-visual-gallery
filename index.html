@@ -6,7 +6,7 @@
   <meta name="description" content="黄华修的 AI 视觉与影视作品集">
   <meta name="theme-color" content="#11110f">
   <title>黄华修的作品馆</title>
-  <link rel="stylesheet" href="editorial.css?v=5">
+  <link rel="stylesheet" href="editorial.css?v=6">
 </head>
 <body>
   <canvas class="ambient-canvas" aria-hidden="true"></canvas>
@@ -49,7 +49,7 @@
     <div class="step-controls" role="group" aria-label="作品切换"><button type="button" id="previous-work" aria-label="上一件作品">PREV</button><span id="work-progress">01 / 10</span><button type="button" id="next-work" aria-label="下一件作品">NEXT</button></div>
     <div class="filter-controls">
       <div class="filter-group" id="media-filters" role="group" aria-label="作品类型"><button type="button" class="is-active" data-filter="all">全部</button><button type="button" data-filter="image">图片</button><button type="button" data-filter="video">影视</button></div>
-      <div class="filter-group secondary-filters" id="production-filters" role="group" aria-label="制作方式"><button type="button" class="is-active" data-filter="all">全部方式</button><button type="button" data-filter="ai">AI 制作</button><button type="button" data-filter="traditional">传统影视</button></div>
+      <div class="filter-group secondary-filters" id="production-filters" role="group" aria-label="制作方式"><button type="button" class="is-active" data-filter="all">全部方式</button></div>
     </div>
   </footer>
   <dialog id="viewer" aria-labelledby="viewer-title">
@@ -57,6 +57,6 @@
     <div class="viewer-copy"><div><span id="viewer-meta"></span><h2 id="viewer-title"></h2><p id="viewer-description"></p></div><span id="viewer-category"></span></div>
   </dialog>
   <script defer src="ambient.js?v=3"></script>
-  <script defer src="editorial-gallery.js?v=5"></script>
+  <script defer src="editorial-gallery.js?v=6"></script>
 </body>
 </html>
