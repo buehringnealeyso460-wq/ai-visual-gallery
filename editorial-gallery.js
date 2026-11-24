@@ -232,6 +232,10 @@ element('open-archive').onclick = () => {
   location.hash = 'archive';
   setView('list');
 };
+element('mobile-archive').onclick = () => {
+  location.hash = 'archive';
+  setView('list');
+};
 element('work-link').onclick = () => {
   history.replaceState(null, '', location.pathname + location.search + '#work');
   setView('slider');
