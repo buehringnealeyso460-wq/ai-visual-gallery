@@ -121,7 +121,10 @@
       "production": "traditional",
       "provider": "bilibili",
       "bvid": "BV1UGypzBEc8",
-      "page": 1
+      "page": 1,
+      "year": "",
+      "thumbnail": "media/video-covers/kwbr928t2dpmwstqtzp-1795510490754.webp",
+      "mobileThumbnail": "media/video-covers/kwbr928t2dpmwstqtzp-1795510490754-mobile.webp"
     },
     {
       "id": "2df48gtzczbmwt0tin8",
