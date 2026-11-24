@@ -23,3 +23,5 @@ dialog{width:min(1120px,94vw);max-height:92dvh;padding:18px;border:1px solid #ff
 @media(max-width:720px){.site-header .primary-nav{position:absolute;right:18px;top:50%;transform:translateY(-50%)}.site-header .primary-nav #open-archive{display:block;color:var(--paper)}}
 @media(max-width:720px){#open-archive{position:fixed!important;top:22px!important;right:18px!important;z-index:100!important;display:block!important;color:var(--paper)!important}}
 @media(max-width:720px){.site-header .primary-nav{position:static!important;transform:none!important}}
+.mobile-archive-link{display:none}
+@media(max-width:720px){.mobile-archive-link{position:fixed;z-index:120;display:block;right:18px;top:19px;padding:4px 0;background:none;color:var(--paper);font-size:.65rem;font-weight:700;letter-spacing:.08em}.primary-nav{display:none}}
