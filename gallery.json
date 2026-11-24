@@ -853,6 +853,22 @@
       "width": 1152,
       "height": 2048,
       "orientation": "portrait"
+    },
+    {
+      "id": "0g3vh86xvn4wmwu8zc86",
+      "title": "AI-视觉图",
+      "year": "2026",
+      "category": "图片作品",
+      "description": "",
+      "type": "image",
+      "kind": "image",
+      "production": "ai",
+      "src": "media/1795497707802-noi9sy.png",
+      "thumbnail": "media/thumbs/1795497707802-noi9sy.webp",
+      "mobileThumbnail": "media/mobile/1795497707802-noi9sy.webp",
+      "width": 1152,
+      "height": 2048,
+      "orientation": "portrait"
     }
   ]
 }
