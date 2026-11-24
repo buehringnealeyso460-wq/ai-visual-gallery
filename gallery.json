@@ -488,6 +488,19 @@
       "width": 2048,
       "height": 1152,
       "orientation": "landscape"
+    },
+    {
+      "id": "vxssvl8yynmwu7kza4",
+      "title": "三国谋定PV-夯",
+      "year": "2026",
+      "category": "影视作品",
+      "description": "",
+      "type": "video",
+      "kind": "short",
+      "production": "ai",
+      "provider": "bilibili",
+      "bvid": "BV1moyoziE43",
+      "page": 1
     }
   ]
 }
