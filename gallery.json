@@ -136,7 +136,10 @@
       "production": "traditional",
       "provider": "bilibili",
       "bvid": "BV1nNyHzsEp9",
-      "page": 2
+      "page": 2,
+      "year": "",
+      "thumbnail": "media/video-covers/2df48gtzczbmwt0tin8-1795510765129.webp",
+      "mobileThumbnail": "media/video-covers/2df48gtzczbmwt0tin8-1795510765129-mobile.webp"
     },
     {
       "id": "g5ya4wy6zjhmwt0uvv3",
