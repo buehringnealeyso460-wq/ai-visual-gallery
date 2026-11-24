@@ -542,7 +542,9 @@
       "production": "ai",
       "provider": "bilibili",
       "bvid": "BV1moyoziE43",
-      "page": 1
+      "page": 1,
+      "thumbnail": "media/video-covers/vxssvl8yynmwu7kza4-1795513310453.webp",
+      "mobileThumbnail": "media/video-covers/vxssvl8yynmwu7kza4-1795513310453-mobile.webp"
     },
     {
       "id": "e3mo32erolmwu7m5f7",
