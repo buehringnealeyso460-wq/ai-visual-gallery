@@ -22,3 +22,4 @@ dialog{width:min(1120px,94vw);max-height:92dvh;padding:18px;border:1px solid #ff
 @media(max-width:720px){.site-header{display:flex;justify-content:space-between}.brand{white-space:nowrap}.primary-nav{flex-shrink:0}.primary-nav #work-link{display:none}}
 @media(max-width:720px){.site-header .primary-nav{position:absolute;right:18px;top:50%;transform:translateY(-50%)}.site-header .primary-nav #open-archive{display:block;color:var(--paper)}}
 @media(max-width:720px){#open-archive{position:fixed!important;top:22px!important;right:18px!important;z-index:100!important;display:block!important;color:var(--paper)!important}}
+@media(max-width:720px){.site-header .primary-nav{position:static!important;transform:none!important}}
