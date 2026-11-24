@@ -527,6 +527,19 @@
       "provider": "bilibili",
       "bvid": "BV11wyZzAE2a",
       "page": 1
+    },
+    {
+      "id": "hg4emofltm5mwu7odeg",
+      "title": "星际猎人-买量广告",
+      "year": "2026",
+      "category": "影视作品",
+      "description": "",
+      "type": "video",
+      "kind": "short",
+      "production": "ai",
+      "provider": "bilibili",
+      "bvid": "BV1swyZzAEoi",
+      "page": 1
     }
   ]
 }
