@@ -20,3 +20,4 @@ dialog{width:min(1120px,94vw);max-height:92dvh;padding:18px;border:1px solid #ff
 @media(max-width:720px){.featured-frame.is-portrait{width:min(62vw,calc(49vh * .5625),310px)}}
 @media(max-width:720px){.primary-nav #open-about{display:none}.featured-header{grid-template-columns:1fr;gap:4px}.featured-mode{text-align:left}#featured-category{white-space:nowrap;overflow:hidden;text-overflow:ellipsis}}
 @media(max-width:720px){.site-header{display:flex;justify-content:space-between}.brand{white-space:nowrap}.primary-nav{flex-shrink:0}.primary-nav #work-link{display:none}}
+@media(max-width:720px){.site-header .primary-nav{position:absolute;right:18px;top:50%;transform:translateY(-50%)}.site-header .primary-nav #open-archive{display:block;color:var(--paper)}}
