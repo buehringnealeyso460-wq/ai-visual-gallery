@@ -618,6 +618,19 @@
       "provider": "bilibili",
       "bvid": "BV18XyozuEeP",
       "page": 1
+    },
+    {
+      "id": "bgkbon56rk9mwu7we7v",
+      "title": "PUBG短剧-1",
+      "year": "2026",
+      "category": "影视作品",
+      "description": "",
+      "type": "video",
+      "kind": "short",
+      "production": "ai",
+      "provider": "bilibili",
+      "bvid": "BV18XyozuE7T",
+      "page": 1
     }
   ]
 }
