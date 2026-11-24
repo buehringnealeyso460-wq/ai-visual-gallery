@@ -2,38 +2,60 @@
 <html lang="zh-CN">
 <head>
   <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width,initial-scale=1">
-  <meta name="description" content="个人 AI 图片与视频作品集">
+  <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+  <meta name="description" content="黄华修的 AI 视觉与影视作品集">
+  <meta name="theme-color" content="#11110f">
   <title>黄华修的作品馆</title>
-  <link rel="stylesheet" href="styles.css"><link rel="stylesheet" href="gallery-sections.css?v=4">
-  <link rel="stylesheet" href="exhibition.css">
-  <link rel="stylesheet" href="image-layout.css?v=5">
-  <link rel="stylesheet" href="cinema-v2.css?v=2">
+  <link rel="stylesheet" href="editorial.css?v=1">
 </head>
 <body>
   <canvas class="ambient-canvas" aria-hidden="true"></canvas>
   <div class="cursor-aura" aria-hidden="true"></div>
-  <header class="hero">
-    <nav><a href="#top" class="brand">黄华修的作品馆</a></nav>
-    <div class="hero-copy" id="top">
-      <p class="eyebrow" id="eyebrow">PERSONAL AI GALLERY</p>
-      <h1 id="hero-title">一些由想象力<br>生长出来的画面</h1>
-      <p class="intro" id="intro">这里收藏着我的 AI 图片与视频实验。慢慢看，希望你也能从中发现一点惊喜。</p>
-    </div>
-    <div class="orb orb-a"></div><div class="orb orb-b"></div>
-    <a class="explore" href="#collection">浏览作品 ↓</a>
+  <header class="site-header">
+    <a class="brand" id="brand-name" href="#work" aria-label="返回精选作品">黄华修的作品馆</a>
+    <p class="creative-label" id="creative-label">AI VISUAL ARTIST / FILMMAKER</p>
+    <nav class="primary-nav" aria-label="主导航">
+      <a class="is-current" id="work-link" href="#work">作品</a>
+      <button type="button" id="open-archive">档案</button>
+      <button type="button" id="open-about">关于</button>
+    </nav>
   </header>
-  <main class="collection" id="collection">
-    <div class="heading"><div><p class="eyebrow">COLLECTION</p><h2 id="gallery-title">作品收藏</h2></div><span id="count">0 件作品</span></div>
-    <section class="work-group"><div class="group-title"><h3>图片作品</h3><span id="image-count">0</span></div><div class="grid" id="image-grid"></div></section>
-    <section class="work-group"><div class="group-title"><h3>短片作品</h3><span id="short-count">0</span></div><div class="grid" id="short-grid"></div></section>
-    <section class="work-group"><div class="group-title"><h3>长片作品</h3><span id="long-count">0</span></div><div class="grid" id="long-grid"></div></section>
-    <div class="empty" id="empty"><b>作品正在准备中</b><span>第一批 AI 视觉作品很快会来到这里。</span></div>
+  <main id="work" class="portfolio-shell">
+    <section class="slider-view" id="slider-view" aria-label="精选作品浏览器">
+      <button class="peek peek-previous" id="peek-previous" type="button" aria-label="上一件作品"></button>
+      <div class="featured-header" aria-live="polite"><span id="featured-category">AI VISUAL</span><span class="featured-mode" id="featured-mode">IMAGE / PORTRAIT</span></div>
+      <div class="featured-composition" id="featured-composition">
+        <h1 class="title-fragment title-left" id="title-left"></h1>
+        <button class="featured-frame" id="featured-frame" type="button" aria-label="查看作品详情">
+          <span class="film-corner corner-tl" aria-hidden="true"></span><span class="film-corner corner-tr" aria-hidden="true"></span><span class="film-corner corner-bl" aria-hidden="true"></span><span class="film-corner corner-br" aria-hidden="true"></span>
+          <span class="frame-scale scale-left" aria-hidden="true">610&nbsp;&nbsp;&nbsp;590&nbsp;&nbsp;&nbsp;570</span><span class="frame-scale scale-right" aria-hidden="true">610&nbsp;&nbsp;&nbsp;590&nbsp;&nbsp;&nbsp;570</span><span class="focus-mark" aria-hidden="true"></span>
+          <span class="featured-media" id="featured-media"></span>
+        </button>
+        <h1 class="title-fragment title-right" id="title-right"></h1>
+      </div>
+      <div class="featured-info"><span class="work-number" id="work-number">01.</span><span class="work-title" id="work-title"></span><span class="work-year" id="work-year">—</span></div>
+      <button class="peek peek-next" id="peek-next" type="button" aria-label="下一件作品"></button>
+    </section>
+    <section class="archive-view" id="archive-view" hidden aria-label="作品列表">
+      <header class="archive-heading"><div><span class="micro-label">ARCHIVE / 全部作品</span><h1 id="archive-title">作品展示</h1></div><div class="archive-intro"><p id="archive-statement"></p><p id="archive-description"></p></div></header>
+      <div class="archive-list" id="archive-list"></div>
+    </section>
+    <section class="about-view" id="about-view" hidden aria-label="关于创作者"><span class="micro-label">ABOUT / 关于</span><h1 id="about-title">黄华修的作品馆</h1><p id="about-description"></p><button type="button" class="text-button" id="about-back">返回作品</button></section>
+    <div class="empty-state" id="empty-state" hidden>当前筛选条件下暂无作品</div>
   </main>
-  <footer><span>黄华修的作品馆</span></footer>
-  <dialog id="viewer"><button class="close" aria-label="关闭">关闭</button><div id="viewer-media"></div><div class="viewer-copy"><div><h3 id="viewer-title"></h3><p id="viewer-description"></p></div><span id="viewer-category"></span></div></dialog>
-  <script defer src="exhibition.js"></script>
-  <script defer src="gallery-app-v3.js?v=5"></script>
+  <footer class="portfolio-controls">
+    <div class="view-switch" role="group" aria-label="视图切换"><button type="button" class="is-active" id="slider-button">SLIDER</button><span>/</span><button type="button" id="list-button">LIST</button></div>
+    <div class="step-controls" role="group" aria-label="作品切换"><button type="button" id="previous-work" aria-label="上一件作品">PREV</button><span id="work-progress">01 / 10</span><button type="button" id="next-work" aria-label="下一件作品">NEXT</button></div>
+    <div class="filter-controls">
+      <div class="filter-group" id="media-filters" role="group" aria-label="作品类型"><button type="button" class="is-active" data-filter="all">全部</button><button type="button" data-filter="image">图片</button><button type="button" data-filter="video">影视</button></div>
+      <div class="filter-group secondary-filters" id="production-filters" role="group" aria-label="制作方式"><button type="button" class="is-active" data-filter="all">全部方式</button><button type="button" data-filter="ai">AI 制作</button><button type="button" data-filter="traditional">传统影视</button></div>
+    </div>
+  </footer>
+  <dialog id="viewer" aria-labelledby="viewer-title">
+    <button class="close" type="button" aria-label="关闭详情">关闭</button><div id="viewer-media"></div>
+    <div class="viewer-copy"><div><span id="viewer-meta"></span><h2 id="viewer-title"></h2><p id="viewer-description"></p></div><span id="viewer-category"></span></div>
+  </dialog>
   <script defer src="ambient.js?v=3"></script>
+  <script defer src="editorial-gallery.js?v=1"></script>
 </body>
 </html>
