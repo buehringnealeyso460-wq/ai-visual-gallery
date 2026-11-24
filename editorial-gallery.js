@@ -123,7 +123,11 @@ function renderFeatured() {
   const [leftTitle, rightTitle] = splitTitle(item.title);
   element('title-left').textContent = leftTitle;
   element('title-right').textContent = rightTitle;
-  element('featured-composition').dataset.longTitle = String(Array.from(item.title || '').length > 12);
+  const titleLength = Array.from(item.title || '').length;
+  element('featured-title-above').textContent = item.title || '未命名作品';
+  element('featured-composition').dataset.longTitle = String(titleLength > 12);
+  element('featured-composition').dataset.titleSize = titleLength > 18 ? 'long' : titleLength > 10 ? 'medium' : 'short';
+  element('featured-composition').classList.toggle('is-portrait-work', orientation(item) === 'portrait');
   element('featured-category').textContent = `${productionLabel(item)} / ${(item.category || '未分类').toUpperCase()}`;
   element('featured-mode').textContent = typeLabel(item);
   element('featured-media').innerHTML = previewMarkup(item, true);
