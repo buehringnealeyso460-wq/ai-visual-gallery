@@ -9,6 +9,9 @@ const galleryState = {
 };
 
 const element = id => document.getElementById(id);
+const AUTOPLAY_DELAY = 3500;
+let autoplayTimer = 0;
+let autoplayPaused = false;
 const escapeHtml = value => String(value ?? '').replace(/[&<>"']/g, character => ({
   '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;'
 })[character]);
@@ -23,6 +26,7 @@ fetch('gallery.json', { cache: 'no-store' })
     applySettings(gallery.settings || {});
     applyFilters();
     if (location.hash === '#video-work') switchHomeDeck('video', false);
+    scheduleAutoplay();
   })
   .catch(showEmpty);
 
@@ -217,6 +221,21 @@ function move(direction) {
   }, reduced ? 0 : 180);
 }
 
+function scheduleAutoplay() {
+  clearTimeout(autoplayTimer);
+  if (autoplayPaused || document.hidden) return;
+  autoplayTimer = setTimeout(() => {
+    const canAdvance = galleryState.view === 'slider' && galleryState.mediaFilter === 'all' && !element('viewer').open;
+    if (canAdvance) move(1);
+    scheduleAutoplay();
+  }, AUTOPLAY_DELAY);
+}
+
+function manualMove(direction) {
+  move(direction);
+  scheduleAutoplay();
+}
+
 function setView(view) {
   if (galleryState.mediaFilter !== 'all') view = 'list';
   galleryState.view = view;
@@ -263,6 +282,7 @@ function switchHomeDeck(deck, animate = true) {
     slider.classList.remove('is-deck-leaving');
     slider.classList.add('is-deck-entering');
     requestAnimationFrame(() => requestAnimationFrame(() => slider.classList.remove('is-deck-entering')));
+    scheduleAutoplay();
   };
   if (!animate || matchMedia('(prefers-reduced-motion: reduce)').matches) return finish();
   slider.dataset.deckDirection = deck === 'video' ? 'down' : 'up';
@@ -307,10 +327,10 @@ function openViewer(item) {
 }
 
 element('featured-frame').onclick = () => openViewer(galleryState.filtered[galleryState.index]);
-element('previous-work').onclick = () => move(-1);
-element('next-work').onclick = () => move(1);
-element('peek-previous').onclick = () => move(-1);
-element('peek-next').onclick = () => move(1);
+element('previous-work').onclick = () => manualMove(-1);
+element('next-work').onclick = () => manualMove(1);
+element('peek-previous').onclick = () => manualMove(-1);
+element('peek-next').onclick = () => manualMove(1);
 element('guide-to-images').onclick = () => switchHomeDeck('image');
 element('guide-to-videos').onclick = () => switchHomeDeck('video');
 element('work-link').onclick = () => {
@@ -338,6 +358,18 @@ element('viewer').onclick = event => {
   if (event.target === element('viewer')) element('viewer').close();
 };
 element('viewer').addEventListener('close', () => element('viewer-media').replaceChildren());
+element('viewer').addEventListener('close', scheduleAutoplay);
+[element('featured-frame'), element('peek-previous'), element('peek-next')].forEach(control => {
+  control.addEventListener('mouseenter', () => {
+    autoplayPaused = true;
+    clearTimeout(autoplayTimer);
+  });
+  control.addEventListener('mouseleave', () => {
+    autoplayPaused = false;
+    scheduleAutoplay();
+  });
+});
+document.addEventListener('visibilitychange', scheduleAutoplay);
 
 document.addEventListener('keydown', event => {
   if (event.target.matches('input,textarea,select,[contenteditable]') || element('viewer').open || galleryState.view !== 'slider') return;
