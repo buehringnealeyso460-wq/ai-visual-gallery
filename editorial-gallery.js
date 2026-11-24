@@ -97,6 +97,11 @@ function previewMarkup(item, eager = false) {
     const loading = eager ? 'fetchpriority="high"' : 'loading="lazy"';
     return `<picture><source media="(max-width:720px)" srcset="${escapeHtml(mobile)}"><img src="${escapeHtml(preview)}" alt="${escapeHtml(item.title)}" ${loading} decoding="async"></picture>`;
   }
+  if (item.thumbnail) {
+    const mobile = item.mobileThumbnail || item.thumbnail;
+    const loading = eager ? 'fetchpriority="high"' : 'loading="lazy"';
+    return `<span class="video-cover"><picture><source media="(max-width:720px)" srcset="${escapeHtml(mobile)}"><img src="${escapeHtml(item.thumbnail)}" alt="${escapeHtml(item.title)}" ${loading} decoding="async"></picture><small>${workKind(item) === 'long' ? 'LONG FILM' : 'SHORT FILM'}</small></span>`;
+  }
   return `<span class="video-poster"><small>BILIBILI / ${workKind(item).toUpperCase()}</small><strong>${escapeHtml(item.title)}</strong></span>`;
 }
 
@@ -151,6 +156,7 @@ function peekMarkup(item, label) {
     const preview = item.mobileThumbnail || item.thumbnail || item.src;
     return `<img src="${escapeHtml(preview)}" alt=""><span class="sr-only">${label}：${escapeHtml(item.title)}</span>`;
   }
+  if (item.thumbnail) return `<img src="${escapeHtml(item.mobileThumbnail || item.thumbnail)}" alt=""><span class="sr-only">${label}：${escapeHtml(item.title)}</span>`;
   return `<span class="peek-label">${label}<br>${escapeHtml(item.title)}</span>`;
 }
 
