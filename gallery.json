@@ -707,7 +707,9 @@
       "production": "ai",
       "provider": "bilibili",
       "bvid": "BV1xFyZzeE1Y",
-      "page": 1
+      "page": 1,
+      "thumbnail": "media/video-covers/86c2ikgy93hmwu7wuf0-1795515221498.webp",
+      "mobileThumbnail": "media/video-covers/86c2ikgy93hmwu7wuf0-1795515221498-mobile.webp"
     },
     {
       "id": "dptf19e5ozvmwu81iu8",
