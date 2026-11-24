@@ -592,6 +592,19 @@
       "provider": "bilibili",
       "bvid": "BV1swyZzAECw",
       "page": 1
+    },
+    {
+      "id": "hdxeuhexoovmwu7sqlp",
+      "title": "武侠PV-夯",
+      "year": "2026",
+      "category": "影视作品",
+      "description": "",
+      "type": "video",
+      "kind": "short",
+      "production": "ai",
+      "provider": "bilibili",
+      "bvid": "BV1KFyZzvE1w",
+      "page": 1
     }
   ]
 }
