@@ -4,6 +4,7 @@ const galleryState = {
   index: 0,
   view: 'slider',
   mediaFilter: 'all',
+  homeDeck: 'image',
   switching: false
 };
 
@@ -21,7 +22,7 @@ fetch('gallery.json', { cache: 'no-store' })
     galleryState.items = gallery.items || [];
     applySettings(gallery.settings || {});
     applyFilters();
-    if (location.hash === '#archive') setView('list');
+    if (location.hash === '#video-work') switchHomeDeck('video', false);
   })
   .catch(showEmpty);
 
@@ -98,7 +99,7 @@ function previewMarkup(item, eager = false) {
 function applyFilters() {
   galleryState.filtered = galleryState.items.filter(item => {
     const media = isImage(item) ? 'image' : 'video';
-    return galleryState.mediaFilter === 'all' || galleryState.mediaFilter === media;
+    return galleryState.mediaFilter === 'all' ? media === galleryState.homeDeck : galleryState.mediaFilter === media;
   });
   galleryState.index = Math.min(galleryState.index, Math.max(0, galleryState.filtered.length - 1));
   element('empty-state').hidden = galleryState.filtered.length > 0;
@@ -215,8 +216,6 @@ function move(direction) {
 function setView(view) {
   if (galleryState.mediaFilter !== 'all') view = 'list';
   galleryState.view = view;
-  element('slider-button').classList.toggle('is-active', view === 'slider');
-  element('list-button').classList.toggle('is-active', view === 'list');
   element('slider-view').hidden = view !== 'slider' || !galleryState.filtered.length;
   element('archive-view').hidden = view !== 'list';
   element('about-view').hidden = true;
@@ -226,17 +225,45 @@ function setView(view) {
 function setFilter(group, value) {
   if (group !== 'media') return;
   galleryState.mediaFilter = value;
+  if (value === 'all') galleryState.homeDeck = 'image';
   element('media-filters').querySelectorAll('button').forEach(button => {
     button.classList.toggle('is-active', button.dataset.filter === value);
   });
   renderProductionNavigation();
   galleryState.view = value === 'all' ? 'slider' : 'list';
-  document.querySelector('.view-switch').hidden = value !== 'all';
+  element('deck-indicator').hidden = value !== 'all';
   document.querySelector('.archive-heading .micro-label').textContent = value === 'image' ? 'COLLECTION / 图片作品' : value === 'video' ? 'COLLECTION / 影视作品' : 'ARCHIVE / 全部作品';
   element('archive-title').textContent = value === 'image' ? '图片作品总览' : value === 'video' ? '影视作品总览' : element('archive-title').dataset.defaultTitle;
   applyFilters();
   setView(galleryState.view);
   element('archive-view').scrollTop = 0;
+  updateDeckGuides();
+}
+
+function updateDeckGuides() {
+  const isHome = galleryState.mediaFilter === 'all' && galleryState.view === 'slider';
+  element('guide-to-images').hidden = !isHome || galleryState.homeDeck !== 'video';
+  element('guide-to-videos').hidden = !isHome || galleryState.homeDeck !== 'image';
+  element('deck-indicator').textContent = galleryState.homeDeck === 'image' ? 'IMAGE COLLECTION' : 'FILM COLLECTION';
+}
+
+function switchHomeDeck(deck, animate = true) {
+  if (!['image', 'video'].includes(deck) || galleryState.homeDeck === deck) return;
+  const slider = element('slider-view');
+  const finish = () => {
+    galleryState.homeDeck = deck;
+    galleryState.index = 0;
+    applyFilters();
+    updateDeckGuides();
+    history.replaceState(null, '', location.pathname + location.search + (deck === 'video' ? '#video-work' : '#work'));
+    slider.classList.remove('is-deck-leaving');
+    slider.classList.add('is-deck-entering');
+    requestAnimationFrame(() => requestAnimationFrame(() => slider.classList.remove('is-deck-entering')));
+  };
+  if (!animate || matchMedia('(prefers-reduced-motion: reduce)').matches) return finish();
+  slider.dataset.deckDirection = deck === 'video' ? 'down' : 'up';
+  slider.classList.add('is-deck-leaving');
+  setTimeout(finish, 280);
 }
 
 function renderProductionNavigation() {
@@ -280,19 +307,17 @@ element('previous-work').onclick = () => move(-1);
 element('next-work').onclick = () => move(1);
 element('peek-previous').onclick = () => move(-1);
 element('peek-next').onclick = () => move(1);
-element('slider-button').onclick = () => setView('slider');
-element('list-button').onclick = () => setView('list');
-element('open-archive').onclick = () => {
-  location.hash = 'archive';
-  setView('list');
-};
-element('mobile-archive').onclick = () => {
-  location.hash = 'archive';
-  setView('list');
-};
+element('guide-to-images').onclick = () => switchHomeDeck('image');
+element('guide-to-videos').onclick = () => switchHomeDeck('video');
 element('work-link').onclick = () => {
   history.replaceState(null, '', location.pathname + location.search + '#work');
+  galleryState.mediaFilter = 'all';
+  galleryState.homeDeck = 'image';
+  element('media-filters').querySelectorAll('button').forEach(button => button.classList.toggle('is-active', button.dataset.filter === 'all'));
+  renderProductionNavigation();
+  applyFilters();
   setView('slider');
+  updateDeckGuides();
 };
 element('open-about').onclick = () => {
   element('slider-view').hidden = true;
@@ -312,11 +337,17 @@ element('viewer').addEventListener('close', () => element('viewer-media').replac
 
 document.addEventListener('keydown', event => {
   if (event.target.matches('input,textarea,select,[contenteditable]') || element('viewer').open || galleryState.view !== 'slider') return;
-  if (event.key === 'ArrowLeft' || event.key === 'ArrowUp') {
+  if (event.key === 'ArrowUp' && galleryState.mediaFilter === 'all') {
+    event.preventDefault();
+    switchHomeDeck('image');
+  } else if (event.key === 'ArrowDown' && galleryState.mediaFilter === 'all') {
+    event.preventDefault();
+    switchHomeDeck('video');
+  } else if (event.key === 'ArrowLeft') {
     event.preventDefault();
     move(-1);
   }
-  if (event.key === 'ArrowRight' || event.key === 'ArrowDown') {
+  if (event.key === 'ArrowRight') {
     event.preventDefault();
     move(1);
   }
@@ -324,19 +355,27 @@ document.addEventListener('keydown', event => {
 
 let wheelLock = false;
 element('slider-view').addEventListener('wheel', event => {
-  const horizontalDelta = Math.abs(event.deltaX) > Math.abs(event.deltaY) ? event.deltaX : event.deltaY;
-  if (Math.abs(horizontalDelta) < 18 || wheelLock) return;
+  if (wheelLock) return;
+  const isVertical = Math.abs(event.deltaY) > Math.abs(event.deltaX);
+  const delta = isVertical ? event.deltaY : event.deltaX;
+  if (Math.abs(delta) < 18) return;
   event.preventDefault();
   wheelLock = true;
-  move(horizontalDelta > 0 ? 1 : -1);
+  if (isVertical && galleryState.mediaFilter === 'all') switchHomeDeck(delta > 0 ? 'video' : 'image');
+  else move(delta > 0 ? 1 : -1);
   setTimeout(() => { wheelLock = false; }, 650);
 }, { passive: false });
 
 let touchStartX = 0;
+let touchStartY = 0;
 element('slider-view').addEventListener('touchstart', event => {
   touchStartX = event.touches[0].clientX;
+  touchStartY = event.touches[0].clientY;
 }, { passive: true });
 element('slider-view').addEventListener('touchend', event => {
   const distance = touchStartX - event.changedTouches[0].clientX;
-  if (Math.abs(distance) > 55) move(distance > 0 ? 1 : -1);
+  const verticalDistance = touchStartY - event.changedTouches[0].clientY;
+  if (Math.abs(verticalDistance) > Math.abs(distance) && Math.abs(verticalDistance) > 55 && galleryState.mediaFilter === 'all') {
+    switchHomeDeck(verticalDistance > 0 ? 'video' : 'image');
+  } else if (Math.abs(distance) > 55) move(distance > 0 ? 1 : -1);
 }, { passive: true });

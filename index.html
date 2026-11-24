@@ -6,7 +6,7 @@
   <meta name="description" content="黄华修的 AI 视觉与影视作品集">
   <meta name="theme-color" content="#11110f">
   <title>黄华修的作品馆</title>
-  <link rel="stylesheet" href="editorial.css?v=6">
+  <link rel="stylesheet" href="editorial.css?v=7">
 </head>
 <body>
   <canvas class="ambient-canvas" aria-hidden="true"></canvas>
@@ -16,13 +16,12 @@
     <p class="creative-label" id="creative-label">AI VISUAL ARTIST / FILMMAKER</p>
     <nav class="primary-nav" aria-label="主导航">
       <a class="is-current" id="work-link" href="#work">作品</a>
-      <button type="button" id="open-archive">档案</button>
       <button type="button" id="open-about">关于</button>
     </nav>
   </header>
-  <button class="mobile-archive-link" id="mobile-archive" type="button">档案</button>
   <main id="work" class="portfolio-shell">
     <section class="slider-view" id="slider-view" aria-label="精选作品浏览器">
+      <button class="deck-guide deck-guide-up" id="guide-to-images" type="button" hidden><span class="guide-line" aria-hidden="true"></span><small>向上浏览</small><strong>图片作品</strong></button>
       <button class="peek peek-previous" id="peek-previous" type="button" aria-label="上一件作品"></button>
       <div class="featured-header" aria-live="polite"><span id="featured-category">AI VISUAL</span><span class="featured-mode" id="featured-mode">IMAGE / PORTRAIT</span></div>
       <div class="featured-composition" id="featured-composition">
@@ -36,6 +35,7 @@
       </div>
       <div class="featured-info"><span class="work-number" id="work-number">01.</span><span class="work-title" id="work-title"></span><span class="work-year" id="work-year">—</span></div>
       <button class="peek peek-next" id="peek-next" type="button" aria-label="下一件作品"></button>
+      <button class="deck-guide deck-guide-down" id="guide-to-videos" type="button"><strong>视频作品</strong><small>向下浏览</small><span class="guide-line" aria-hidden="true"></span></button>
     </section>
     <section class="archive-view" id="archive-view" hidden aria-label="作品列表">
       <header class="archive-heading"><div><span class="micro-label">ARCHIVE / 全部作品</span><h1 id="archive-title">作品展示</h1></div><div class="archive-intro"><p id="archive-statement"></p><p id="archive-description"></p></div></header>
@@ -45,7 +45,7 @@
     <div class="empty-state" id="empty-state" hidden>当前筛选条件下暂无作品</div>
   </main>
   <footer class="portfolio-controls">
-    <div class="view-switch" role="group" aria-label="视图切换"><button type="button" class="is-active" id="slider-button">SLIDER</button><span>/</span><button type="button" id="list-button">LIST</button></div>
+    <div class="deck-indicator" id="deck-indicator">IMAGE COLLECTION</div>
     <div class="step-controls" role="group" aria-label="作品切换"><button type="button" id="previous-work" aria-label="上一件作品">PREV</button><span id="work-progress">01 / 10</span><button type="button" id="next-work" aria-label="下一件作品">NEXT</button></div>
     <div class="filter-controls">
       <div class="filter-group" id="media-filters" role="group" aria-label="作品类型"><button type="button" class="is-active" data-filter="all">全部</button><button type="button" data-filter="image">图片</button><button type="button" data-filter="video">影视</button></div>
@@ -57,6 +57,6 @@
     <div class="viewer-copy"><div><span id="viewer-meta"></span><h2 id="viewer-title"></h2><p id="viewer-description"></p></div><span id="viewer-category"></span></div>
   </dialog>
   <script defer src="ambient.js?v=3"></script>
-  <script defer src="editorial-gallery.js?v=6"></script>
+  <script defer src="editorial-gallery.js?v=7"></script>
 </body>
 </html>

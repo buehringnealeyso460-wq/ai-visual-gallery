@@ -55,3 +55,15 @@ dialog{width:min(1120px,94vw);max-height:92dvh;padding:18px;border:1px solid #ff
 .catalog-empty{color:#77736b}
 @media(max-width:980px){.gallery-grid{grid-template-columns:repeat(3,minmax(0,1fr))}.video-grid{grid-template-columns:repeat(2,minmax(0,1fr))}}
 @media(max-width:720px){.gallery-grid,.video-grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:18px 10px}.catalog-section{padding:36px 0}.catalog-section>header{margin-bottom:20px}.catalog-section>header span{font-size:2.2rem}.orientation-group+.orientation-group{margin-top:36px}.gallery-card-copy{grid-template-columns:1fr;padding-top:8px}.gallery-card-copy small{display:none}.video-grid .video-poster{padding:12px}.video-grid .video-poster strong{font-size:.9rem}.archive-heading{padding-bottom:22px}}
+
+/* Two-level home: image collection above film collection */
+.deck-indicator{justify-self:start;color:#9d998e;font-size:.63rem;letter-spacing:.09em}
+.deck-guide{position:absolute;z-index:12;left:50%;display:grid;justify-items:center;gap:3px;min-width:150px;padding:8px 20px;background:linear-gradient(90deg,transparent,#11110fe6 22%,#11110fe6 78%,transparent);transform:translateX(-50%);cursor:pointer;color:var(--paper);text-align:center}
+.deck-guide-up{top:2px}.deck-guide-down{bottom:2px}
+.deck-guide strong{font:400 .78rem/1.1 Georgia,"Noto Serif SC",serif;letter-spacing:.08em}.deck-guide small{color:#8f8a80;font:600 .55rem/1.1 "Courier New",monospace;letter-spacing:.12em;text-transform:uppercase}
+.guide-line{display:block;width:1px;height:18px;background:linear-gradient(transparent,var(--paper))}.deck-guide-down .guide-line{background:linear-gradient(var(--paper),transparent)}
+.deck-guide:hover strong{color:var(--accent)}.deck-guide:hover .guide-line{height:25px}
+.slider-view{transition:opacity .28s ease,transform .55s cubic-bezier(.22,.8,.2,1)}
+.slider-view.is-deck-leaving{opacity:0}.slider-view.is-deck-leaving[data-deck-direction="down"]{transform:translateY(-42px)}.slider-view.is-deck-leaving[data-deck-direction="up"]{transform:translateY(42px)}
+.slider-view.is-deck-entering{opacity:0}.slider-view.is-deck-entering[data-deck-direction="down"]{transform:translateY(42px)}.slider-view.is-deck-entering[data-deck-direction="up"]{transform:translateY(-42px)}
+@media(max-width:720px){.primary-nav{display:flex}.primary-nav #open-about{display:none}.deck-guide{min-width:130px;padding:5px 14px}.deck-guide-up{top:0}.deck-guide-down{bottom:0}.guide-line{height:12px}.deck-guide strong{font-size:.7rem}.deck-indicator{font-size:.56rem}}
