@@ -100,9 +100,9 @@ function previewMarkup(item, eager = false) {
   if (item.thumbnail) {
     const mobile = item.mobileThumbnail || item.thumbnail;
     const loading = eager ? 'fetchpriority="high"' : 'loading="lazy"';
-    return `<span class="video-cover"><picture><source media="(max-width:720px)" srcset="${escapeHtml(mobile)}"><img src="${escapeHtml(item.thumbnail)}" alt="${escapeHtml(item.title)}" ${loading} decoding="async"></picture><small>${workKind(item) === 'long' ? 'LONG FILM' : 'SHORT FILM'}</small></span>`;
+    return `<span class="video-cover"><picture><source media="(max-width:720px)" srcset="${escapeHtml(mobile)}"><img src="${escapeHtml(item.thumbnail)}" alt="${escapeHtml(item.title)}" ${loading} decoding="async"></picture><span class="video-play-mark" aria-hidden="true"><i></i></span><small>${workKind(item) === 'long' ? 'LONG FILM' : 'SHORT FILM'}</small></span>`;
   }
-  return `<span class="video-poster"><small>BILIBILI / ${workKind(item).toUpperCase()}</small><strong>${escapeHtml(item.title)}</strong></span>`;
+  return `<span class="video-poster"><span class="video-play-mark" aria-hidden="true"><i></i></span><small>BILIBILI / ${workKind(item).toUpperCase()}</small><strong>${escapeHtml(item.title)}</strong></span>`;
 }
 
 function applyFilters() {
