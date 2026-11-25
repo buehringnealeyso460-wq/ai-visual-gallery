@@ -9,7 +9,7 @@ const galleryState = {
 };
 
 const element = id => document.getElementById(id);
-const AUTOPLAY_DELAY = 3500;
+const AUTOPLAY_DELAY = 2000;
 let autoplayTimer = 0;
 let autoplayPaused = false;
 const escapeHtml = value => String(value ?? '').replace(/[&<>"']/g, character => ({
