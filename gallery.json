@@ -945,6 +945,21 @@
       "width": 1152,
       "height": 2048,
       "orientation": "portrait"
+    },
+    {
+      "id": "wv79lp5n36mwvt3g8e",
+      "title": "男子啦啦队",
+      "year": "2026",
+      "category": "影视作品",
+      "description": "",
+      "type": "video",
+      "kind": "short",
+      "production": "ai",
+      "provider": "bilibili",
+      "bvid": "BV1KgyrzXEeD",
+      "page": 1,
+      "thumbnail": "media/video-covers/1795591962199-npvy2k.webp",
+      "mobileThumbnail": "media/video-covers/1795591962199-npvy2k-mobile.webp"
     }
   ]
 }
