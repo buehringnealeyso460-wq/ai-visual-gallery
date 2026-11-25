@@ -960,6 +960,21 @@
       "page": 1,
       "thumbnail": "media/video-covers/1795591962199-npvy2k.webp",
       "mobileThumbnail": "media/video-covers/1795591962199-npvy2k-mobile.webp"
+    },
+    {
+      "id": "pfacylpj2qdmwvt9c88",
+      "title": "男子啦啦队",
+      "year": "2026",
+      "category": "影视作品",
+      "description": "",
+      "type": "video",
+      "kind": "short",
+      "production": "ai",
+      "provider": "bilibili",
+      "bvid": "BV1KuyrzWESJ",
+      "page": 1,
+      "thumbnail": "media/video-covers/1795592235224-3827io.webp",
+      "mobileThumbnail": "media/video-covers/1795592235224-3827io-mobile.webp"
     }
   ]
 }
